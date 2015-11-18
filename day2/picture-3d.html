@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>picture</title>
+	<style>
+    *{padding:0;margin:0;list-style:none;}
+    body{background:url(img/bg.jpg);}
+    ul{width:480px;height:260px;margin:200px auto;position:relative;}
+    ul li{width:480px;height:260px;position:absolute;left:0;top:0;opacity:0;-webkit-transition:1s all ease;-webkit-transform:perspective(1100px) translateX(0);}
+    ul li.l1{-webkit-transform:perspective(1100px) translateX(-350px) rotateY(45deg);opacity:0;z-index: 1}
+    ul li.l{-webkit-transform:perspective(1100px) translateX(-300px) rotateY(45deg);opacity:1;z-index: 2}
+    ul li.cur{-webkit-transform:perspective(1100px) translateX(0);opacity:1;z-index: 3}
+    ul li.r{-webkit-transform:perspective(1100px) translateX(300px) rotateY(-45deg);opacity:1;z-index: 2}
+    ul li.r1{-webkit-transform:perspective(1100px) translateX(350px) rotateY(-45deg);opacity:0;z-index: 1}
+	</style>
+	<script>
+      window.onload=function(){
+      	var oBtn=document.body.children[0];
+      	var aLi=document.querySelectorAll('li');
+      	var iNow=2;
+      	oBtn.onclick=function(){
+             iNow++;
+             aLi[(iNow-2)%12].className='l1';
+             aLi[(iNow-1)%12].className='l';
+             aLi[iNow%12].className='cur';
+             aLi[(iNow+1)%12].className='r';
+             aLi[(iNow+2)%12].className='r1';
+
+      	};
+      };
+	</script>
+</head>
+<body>
+    <input type="button" value="next">
+	<ul>
+		<li class="l1"><img src="img/1.jpg" alt="1"></li>
+		<li class="l"><img src="img/2.jpg" alt="1"></li>
+		<li class="cur"><img src="img/3.jpg" alt="1"></li>
+		<li class="r"><img src="img/4.jpg" alt="1"></li>
+		<li class="r1"><img src="img/5.jpg" alt="1"></li>
+		<li><img src="img/6.jpg" alt="1"></li>
+		<li><img src="img/7.jpg" alt="1"></li>
+		<li><img src="img/8.jpg" alt="1"></li>
+		<li><img src="img/9.jpg" alt="1"></li>
+		<li><img src="img/10.jpg" alt="1"></li>
+		<li><img src="img/11.jpg" alt="1"></li>
+		<li><img src="img/12.jpg" alt="1"></li>
+	</ul>
+</body>
+</html>
