@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>fanye</title>
+	<style>
+	    *{margin:0;padding:0;list-style:none;}
+        .box{width:700px;height:400px;background:#ccc;margin:100px auto;position:relative;top:0;left:0;}
+        .box span{position:absolute;left:0;top:0;-webkit-transform-style:preserve-3d;-webkit-transform:perspective(800px) rotateY(0deg);-webkit-transition:1s all ease;}
+        .box span em{position:absolute;top:0;left:0;width:100%;height:100%;}
+        .box span em.front{background:url(img/a.jpg);-webkit-transform:translateZ(1px);}
+        .box span em.back{background:url(img/b.jpg);-webkit-transform:translateZ(-1px) scale(-1,1);}
+
+	</style>
+	<script>
+          window.onload=function(){
+          	var oBox=document.querySelector('.box');
+          	var aS=oBox.children;
+          	var oBtn=document.querySelector('.btn');
+            var R=7;
+            var C=4;
+            for(var i=0;i<R;i++){
+            	for(var j=0;j<C;j++){
+            		var oS=document.createElement('span');
+            		oS.style.width=oBox.offsetWidth/R+'px';
+            		oS.style.height=oBox.offsetHeight/C+'px';
+            		oS.innerHTML='<em class="front"></em><em class="back"></em>';
+            		var oFr=oS.children[0];
+            		var oBa=oS.children[1];
+            		oBox.appendChild(oS);
+            		oFr.style.backgroundPosition='-'+oS.offsetWidth*i+'px -'+oS.offsetHeight*j+'px';
+            		oBa.style.backgroundPosition='-'+oS.offsetWidth*i+'px -'+oS.offsetHeight*j+'px';
+
+            		oS.style.left=oS.offsetWidth*i+'px';
+            		oS.style.top=oS.offsetHeight*j+'px';
+            		oS.R=i;
+            		oS.C=j;
+            	}
+            }
+
+          	oBtn.onclick=function(){
+                for(var i=0;i<aS.length;i++){
+			(function(index){
+				setTimeout(function(){
+					aS[index].style.WebkitTransform='perspective(800px) rotateY(180deg)';
+				},(aS[i].C+aS[i].R)*100);
+			})(i);
+		}
+          	};
+          };
+	</script>
+</head>
+<body>
+   <input class="btn" type="button" value="gogogog">
+	 <div class="box"></div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>3D</title>
+	<style>
+       *{margin:0;padding:0;list-style:none;}
+       body{background:#111;}
+       ul{width:133px;height:200px;margin:120px auto;position:relative;left:0;top:0;-webkit-transform-style:preserve-3d;-webkit-transform:perspective(800px) rotateX(-25deg) rotateY(0deg);-webkit-transition:2s all ease;}
+       ul li{width:100%;height:100%;position:absolute;left:0;top:0;-webkit-transition:3s all ease;}
+       ul:hover{-webkit-transform:perspective(800px) rotateX(-45deg) rotateY(160deg);}
+	</style>
+	<script>
+      window.onload=function(){
+      	var oUl=document.body.children[0];
+      	var aLi=oUl.children;
+      	var timer=null;
+      	var i=aLi.length-1;
+      	  //for(var i=0;i<aLi.length;i++){
+      	  	//aLi[i].style.WebkitTransform='rotateY('+i*360/aLi.length+'deg) translateZ(300px)';
+      	 // }
+      	 timer=setInterval(function(){
+               aLi[i].style.WebkitTransform='rotateY('+i*360/aLi.length+'deg) translateZ(300px)';
+               i--;
+               if(i<0){
+               	clearInterval(timer)
+               }
+      	 },100)
+
+      };
+	</script>
+</head>
+<body>
+	<ul>
+		<li><img src="img/1.jpg"></li>
+		<li><img src="img/2.jpg"></li>
+		<li><img src="img/3.jpg"></li>
+		<li><img src="img/4.jpg"></li>
+		<li><img src="img/5.jpg"></li>
+		<li><img src="img/6.jpg"></li>
+		<li><img src="img/7.jpg"></li>
+		<li><img src="img/8.jpg"></li>
+		<li><img src="img/9.jpg"></li>
+		<li><img src="img/10.jpg"></li>
+		<li><img src="img/11.jpg"></li>
+	</ul>
+</body>
+</html>
