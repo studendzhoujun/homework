@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>geo</title>
+	<script>
+          navigator.geolocation.watchPosition(function(pos){
+          	alert('成功'+pos.coords.longitude+','+pos.coords.latitude)
+          },function(err){
+          	alert('失败'+err.code)
+          })
+           
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

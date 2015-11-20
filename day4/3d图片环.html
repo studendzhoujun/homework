@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>3d</title>
+	<style>
+	     body{background:#111;}
+        *{margin:0;padding:0;list-style:none;}
+        ul{width:133px;height:200px;margin:170px auto;position:relative;-webkit-transform-style:preserve-3d;-webkit-transform:perspective(800px) rotateX(-25deg);}
+        ul li{position:absolute;top:0;left:0;-webkit-transition:1s all ease;}
+	</style>
+	<script>
+        window.onload=function(){
+        	var aLi=document.getElementsByTagName('li');
+        	for(var i=0;i<aLi.length;i++){
+        		aLi[i].style.WebkitTransform='rotateY('+i*360/aLi.length+'deg) translateZ(300px)';
+        	}
+        };
+	</script>
+</head>
+<body>
+	<ul>
+		<li><img src="img/1.jpg" /></li>
+		<li><img src="img/2.jpg" /></li>
+		<li><img src="img/3.jpg" /></li>
+		<li><img src="img/4.jpg" /></li>
+		<li><img src="img/5.jpg" /></li>
+		<li><img src="img/6.jpg" /></li>
+		<li><img src="img/7.jpg" /></li>
+		<li><img src="img/8.jpg" /></li>
+		<li><img src="img/9.jpg" /></li>
+		<li><img src="img/10.jpg" /></li>
+		<li><img src="img/11.jpg" /></li>
+	</ul>
+</body>
+</html>

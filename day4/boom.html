@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>boom</title>
+	<style>
+       *{margin:0;padding:0;}
+       body{background:#111;}
+       div{width:133px;height:200px;background:url(img/1.jpg);margin:150px auto;position:relative;left:0;top:0;-webkit-transform:perspective(800px);-webkit-transform-style:preserve-3d;}
+       div span{position:absolute;left:0;top:0;background:url(img/2.jpg);opacity:1;}
+	</style>
+	<script>
+          function rnd(n,m){
+            return parseInt(n+Math.random()*(m-n))
+          }
+           window.onload=function(){
+           	var oDiv=document.getElementsByTagName('div')[0];
+           	var aS=oDiv.children;
+           	var oBtn=document.body.children[0];
+           	var R=7;
+           	var C=5;
+           	for(var i=0;i<R;i++){
+           		for(var j=0;j<C;j++){
+           			var oS=document.createElement('span');
+           			oS.style.width=oDiv.offsetWidth/R+'px';
+           			oS.style.height=oDiv.offsetHeight/C+'px';
+           			oDiv.appendChild(oS);
+           			oS.style.backgroundPosition='-'+oS.offsetWidth*i+'px -'+oS.offsetHeight*j+'px';
+           			oS.style.left=oS.offsetWidth*i+'px';
+           			oS.style.top=oS.offsetHeight*j+'px';
+           		}
+           	}
+
+           	oBtn.onclick=function(){
+           	for(var i=0;i<aS.length;i++){
+           		 aS[i].style.WebkitTransition='1s all ease'
+           		var cX=aS[i].offsetLeft+aS[i].offsetWidth/2;
+           		var cY=aS[i].offsetTop+aS[i].offsetHeight/2;
+           		var divX=oDiv.offsetWidth/2;
+           		var divY=oDiv.offsetHeight/2;
+           		var disX=(cX-divX)*10;
+           		var disY=(cY-divY)*10;
+           		aS[i].style.WebkitTransform='perspective(800px) translate('+disX+'px,'+disY+'px) translateZ(700px) rotateX('+rnd(-180,180)+'deg) rotateY('+rnd(-180,180)+'deg)';
+           		aS[i].style.opacity=0;
+
+           	}
+            };
+           };
+	</script>
+</head>
+<body>
+  <input type="button" value="gogogogogo">
+	<div></div>
+</body>
+</html>

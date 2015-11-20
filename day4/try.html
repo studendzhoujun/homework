@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>try</title>
+	<style>
+     *{margin:0;padding:0;list-style:none;}
+     body{background:#111;}
+     ul{width:400px;height:400px;margin:100px auto;position:relative;left:0;top:0;-webkit-transform-style:preserve-3d;-webkit-transform:perspective(800px) rotateX(-30deg);-webkit-transition:1s all ease;}
+     ul li{position:absolute;left:0;top:0;width:100%;height:100%;opacity:0.8;}
+     .top{background:#090;-webkit-transform:translateX(-100px) translateY(-200px) rotateX(90deg);}
+     .bottom{background:#909;-webkit-transform:translateX(-100px) translateY(000px) rotateX(-90deg);}
+     .c{background:#399;width:230px;height:200px;}
+     ul:hover{-webkit-transform:rotateX(70deg);}
+	</style>
+	<script>
+         window.onload=function(){
+         	var aC=document.querySelectorAll('.c');
+         	for(var i=0;i<aC.length;i++){
+         		aC[i].style.WebkitTransform='rotateY('+i*360/aC.length+'deg) translateZ(200px)';
+         	}
+         };
+	</script>
+</head>
+<body>
+	<ul>
+		<li class="top"></li>
+		<li class="bottom"></li>
+		<li class="c" style="background:red"></li>
+		<li class="c" style="background:blue"></li>
+		<li class="c"></li>
+		<li class="c"></li>
+		<li class="c" style="background:pink"></li>
+		<li class="c" style="background:yellow"></li>
+	</ul>
+</body>
+</html>
