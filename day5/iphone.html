@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>iphone</title>
+	<style>
+      *{margin:0;padding:0;}
+      body{background:#721;}
+      .box{width:200px;height:50px;border:1px solid #111;margin:100px auto;position:relative;left:0;top:0;font-size:30px;text-align:center;line-height:50px;}
+      .ba{width:200px;height:50px;position:absolute;left:0;top:0;z-index: 1;}
+      .fr{
+      	width:200px;height:50px;
+      	position:absolute;
+      	left:0;top:0;
+      	-webkit-background-clip:text;
+      	color:rgba(0,0,0,0);
+      	z-index:2;
+      }
+	</style>
+	<script>
+          window.onload=function(){
+          	var oFr=document.querySelector('.fr');
+            var i=-10;
+            setInterval(function(){
+              i+=3;
+              if(i>=200){
+                i=-10;
+              }
+          	oFr.style.background='-webkit-linear-gradient(-30deg,rgba(255,255,255,0) '+i+'px,rgba(255,255,255,1) '+(i+20)+'px,rgba(255,255,255,0) '+(i+40)+'px)';
+          	oFr.style.WebkitBackgroundClip='text';
+           },30)
+          };
+	</script>
+</head>
+<body>
+	<div class="box">
+		<div class="ba">滑动滑块解锁</div>
+		<div class="fr">滑动滑块解锁</div>
+	</div>
+</body>
+</html>

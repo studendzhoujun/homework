@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>cubicmove</title>
+	<style>
+     *{margin:0;padding:0;}
+     body{background:#111;}
+     .box{width:200px;height:200px;margin:100px auto;position:relative;left:0;top:0;-webkit-transform:perspective(800px);-webkit-transform-style:preserve-3d;}
+     .box div{width:100%;height:100%;position:absolute;left:0;top:0;text-align:center;line-height:200px;}
+     .left{background:#909;-webkit-transform:translateX(-100px) rotateY(-90deg);}
+     .right{background:#090;-webkit-transform:translateX(100px) rotateY(90deg);}
+     .top{background:#399;-webkit-transform:translateY(-100px) rotateX(90deg);}
+     .bottom{background:#f90;-webkit-transform:translateY(100px) rotateX(-90deg);}
+     .back{background:#999;-webkit-transform:translateZ(-100px);}
+     .front{background:#673;-webkit-transform:translateZ(100px);}
+	</style>
+	<script>
+     window.onload=function(){
+     	var oBox=document.querySelector('.box');
+     	var left=false;
+     	var right=false;
+     	var top=false;
+     	var bottom=false;
+     	var y=0;
+     	var x=0;
+     	document.onmousedown=function(ev){
+             var disX=ev.clientX-y;
+             var disY=ev.clientY-x;
+
+             document.onmousemove=function(ev){
+             	y=ev.clientX-disX;
+             	x=ev.clientY-disY;
+  oBox.style.WebkitTransform='perspective(800px) rotateX('+-x+'deg) rotateY('+y+'deg)';
+             };
+             document.onmouseup=function(){
+             	document.onmousemove=null;
+             	document.onmouseup=null;
+             };
+             return false;
+     	};
+     	setInterval(function(){
+     		if(left){
+     			y-=5;
+     			oBox.style.WebkitTransform='perspective(800px) rotateX('+x+'deg) rotateY('+y+'deg)';
+     		}else if(right){
+               y+=5;
+               oBox.style.WebkitTransform='perspective(800px) rotateX('+x+'deg) rotateY('+y+'deg)';
+     		}else if(top){
+     			x+=5;
+     		  oBox.style.WebkitTransform='perspective(800px) rotateX('+x+'deg) rotateY('+y+'deg)';
+     		}else if(bottom){
+     			x-=5;
+     	      oBox.style.WebkitTransform='perspective(800px) rotateX('+x+'deg) rotateY('+y+'deg)';
+     		}
+     	},30)
+     	document.onkeydown=function(ev){
+                switch(ev.keyCode){
+                	case 37:
+                	   left=true;
+                	break;
+                	case 38:
+                	   top=true;
+                	break;
+                	case 39:
+                	   right=true;
+                	break;
+                	case 40:
+                	   bottom=true;
+                	break;
+                }
+     	};
+       document.onkeyup=function(ev){
+                switch(ev.keyCode){
+                	case 37:
+                	   left=false;
+                	break;
+                	case 38:
+                	   top=false;
+                	break;
+                	case 39:
+                	   right=false;
+                	break;
+                	case 40:
+                	   bottom=false;
+                	break;
+                }
+     	};
+     };
+	</script>
+</head>
+<body>
+	<div class="box">
+		<div class="front">前</div>
+		<div class="back">后</div>
+		<div class="left">左</div>
+		<div class="right">右</div>
+		<div class="top">上</div>
+		<div class="bottom">下</div>
+	</div>
+</body>
+</html>
