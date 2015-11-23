@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>animation-transition</title>
+	<style>
+        *{margin:0;padding:0;}
+        @-webkit-keyframes test{
+        	from{-webkit-transform:translateX(0px);}
+        	to{-webkit-transform:translateX(-600px);}
+        }
+        .box{width:600px;height:30px;border:1px solid #111;margin:100px auto;overflow:hidden;border-radius:15px;}
+        .bar{width:1200px;height:30px;background:-webkit-repeating-linear-gradient(-45deg,red 0px,red 10px,green 10px,green 20px);
+        	--webkit-animation-name:test;
+        	--webkit-animation-duration:5s;
+        	--webkit-animation-iteration-count:infinite;
+        	--webkit-animation-timing-function:linear;
+        	--webkit-animation-direction:alternate;
+        	--webkit-animation-fill-mode:forwards;
+        }
+	</style>
+	<script>
+    window.onload=function(){
+    	var oBar=document.querySelector('.bar');
+    	var left=0;
+    	var timer=null;
+    	timer=setInterval(function(){
+    		left-=3;
+    		if(left<=-600){
+    			left=0;
+    		}
+    		oBar.style.WebkitTransform='translateX('+left+'px)';
+    	},20)
+    	oBar.onmouseover=function(){
+    		clearInterval(timer)
+    	};
+    	oBar.onmouseout=function(){
+    		timer=setInterval(function(){
+    		left-=3;
+    		if(left<=-600){
+    			left=0;
+    		}
+    		oBar.style.WebkitTransform='translateX('+left+'px)';
+    	},20)
+    	};
+    };
+	</script>
+</head>
+<body>
+	<div class="box">
+		<div class="bar"></div>
+	</div>
+</body>
+</html>

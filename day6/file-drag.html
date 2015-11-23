@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>file-drag</title>
+	<style>
+    *{margin:0;padding:0;}
+    .box{width:300px;height:200px;margin:100px auto;background:#909;color:#fff;text-align:center;line-height:200px;}
+	</style>
+	<script>
+          window.onload=function(){
+          	var oBox=document.querySelector('.box');
+            var oCon=document.querySelector('.cont');
+          	oBox.ondragenter=function(){
+          		oBox.innerHTML='请释放鼠标';
+          	};
+          	oBox.ondragleave=function(){
+          		oBox.innerHTML='请将文件拖到此处';
+          	};
+          	oBox.ondragover=function(){
+          		return false;
+          	};
+          	oBox.ondrop=function(ev){
+          		var oFile=ev.dataTransfer.files[0];
+              //oCon.innerHTML=oFile.name+'-'+oFile.size+'-'+oFile.type;
+              var reader=new FileReader();
+              reader.onload=function(){
+                alert('over')
+              };
+              reader.readAsDataURL(oFile);
+              reader.onprogress=function(ev){
+                   oCon.innerHTML=(ev.loaded*100/ev.total).toFixed(2)+'%';
+              };
+          		return false;
+          	};
+          };
+	</script>
+</head>
+<body>
+  <div class="cont">sss-sss-sss</div>
+	<div class="box">请将文件拖到此处</div>
+</body>
+</html>
