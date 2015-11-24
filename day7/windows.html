@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>windows</title>
+	<style>
+     *{margin:0;padding:0;}
+     body{overflow:hidden;}
+     #c1{background:#111;}
+	</style>
+	<script>
+	      function rnd(n,m){
+	      	return parseInt(n+Math.random()*(m-n))
+	      };
+         window.onload=function(){
+         	var oC=document.querySelector('#c1');
+         	var gc=oC.getContext('2d');
+         	var winW=document.documentElement.clientWidth;
+         	var winH=document.documentElement.clientHeight;
+         	oC.width=winW;
+         	oC.height=winH;
+
+         	var N=5;
+         	var apoint=[];
+         	var oldpoint=[];
+         
+         	for(var i=0;i<N;i++){
+         		 apoint[i]={
+         		 	x:rnd(0,winW),
+         		 	y:rnd(0,winH),
+         		 	speedX:rnd(-10,10),
+         		 	speedY:rnd(-10,10)
+         		 }
+         	}
+            
+            //draw point
+            for(var i=0;i<N;i++){
+            	drawPoint(apoint[i])
+            }
+            function drawPoint(point){
+            	gc.fillStyle='red';
+            	gc.fillRect(point.x,point.y,1,1)
+            }
+            //move point
+            setInterval(function(){
+            	gc.clearRect(0,0,winW,winH)
+                  for(var i=0;i<N;i++){
+                  	apoint[i].x+=apoint[i].speedX;
+                  	apoint[i].y+=apoint[i].speedY;
+                  	if(apoint[i].x<0){
+                  		apoint[i].x=0;
+                  		apoint[i].speedX*=-1;
+                  	}
+                  	if(apoint[i].x>winW){
+                  		apoint[i].x=winW;
+                  		apoint[i].speedX*=-1;
+                  	}
+                  	if(apoint[i].y<0){
+                  		apoint[i].y=0;
+                  		apoint[i].speedY*=-1;
+                  	}
+                  	if(apoint[i].y>winH){
+                  		apoint[i].y=winH;
+                  		apoint[i].speedY*=-1;
+                  	}
+                  	gc.fillRect(apoint[i].x,apoint[i].y,1,1);
+                   }
+
+                   //conect point
+                  	gc.beginPath();
+                  	gc.strokeStyle='red';
+                  	gc.moveTo(apoint[0].x,apoint[0].y);
+                  	for(var j=1;j<apoint.length;j++){
+                  		gc.lineTo(apoint[j].x,apoint[j].y)
+                  	}
+                  	gc.closePath();
+                  	gc.stroke();
+
+                  	//save oldpoint
+                  	var arr=[];
+                  	for(var j=0;j<apoint.length;j++){
+                  		arr.push({
+                  			x:apoint[j].x,
+                  			y:apoint[j].y,
+                  		})
+                  	}
+                    oldpoint.push(arr);
+                    while(oldpoint.length>80){
+                    	oldpoint.shift();
+                    }
+                    //draw oldpoint
+                   
+                    for(var k=0;k<oldpoint.length;k++){
+                    	gc.beginPath();
+                    	var opacity=(k+1)/(oldpoint.length+1)
+                    	gc.strokeStyle='rgba(255,255,121,'+opacity+')';
+                    	gc.moveTo(oldpoint[k][0].x,oldpoint[k][0].y);
+                    	for(var n=1;n<oldpoint[k].length;n++){
+                    		gc.lineTo(oldpoint[k][n].x,oldpoint[k][n].y)
+                    	}
+                    	gc.closePath();
+                    	gc.stroke();
+                    }
+                  
+            },16)
+
+
+         	
+         };
+	</script>
+</head>
+<body>
+	<canvas id="c1"></canvas>
+</body>
+</html>

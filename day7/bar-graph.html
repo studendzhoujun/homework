@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>bar-graph</title>
+	<style>
+     *{margin:0;padding:0;}
+     body{background:#111;}
+     #c1{background:#fff;}
+
+	</style>
+	<script>
+	     function rnd(n,m){
+	     	return parseInt(n+Math.random()*(m-n))
+	     }
+         window.onload=function(){
+         	var oC=document.querySelector('#c1');
+         	var gc=oC.getContext('2d');
+         	var arr=[211,122,432,54,32,167,55,123]
+         	var iMax=Math.max.apply(null,arr);
+         	var aHeight=[];
+         	var speace=oC.width/(arr.length*4-1);
+         	var w=speace*3;
+         	for(var i=0;i<arr.length;i++){
+         		aHeight.push(arr[i]/iMax*oC.height)
+         	}
+         	for(var i=0;i<aHeight.length;i++){
+         		gc.fillStyle='rgb('+rnd(0,256)+','+rnd(0,256)+','+rnd(0,256)+')'
+         		gc.fillRect(i*w+i*speace,oC.height-aHeight[i],w,aHeight[i])
+         	};
+
+         };
+	</script>
+</head>
+<body>
+	<canvas id="c1" width="800" height="600"></canvas>
+</body>
+</html>
