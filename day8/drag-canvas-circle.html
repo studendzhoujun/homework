@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>drag-canvas-circle</title>
+	<style>
+      *{margin:0;padding:0;}
+      body{background:#111;text-align:center;}
+      canvas{background:#fff;}
+	</style>
+	<script>
+         window.onload=function(){
+         	var oC=document.querySelector('#c1');
+         	var gc=oC.getContext('2d');
+
+         	var cx=100;
+         	var cy=100;
+         	var r=50;
+
+         	gc.arc(cx,cy,r,0,2*Math.PI,false);
+         	gc.stroke();
+         	oC.onmousedown=function(ev){
+         		
+         		var x=ev.pageX-oC.offsetLeft;
+         		var y=ev.pageY-oC.offsetTop;
+         		var a=x-cx;
+         		var b=y-cy;
+         		var dis=Math.sqrt(a*a+b*b);
+         		if(dis<=r){
+                     var disX=ev.pageX-oC.offsetLeft-cx;
+                     var disY=ev.pageY-oC.offsetTop-cy;
+                     document.onmousemove=function(ev){
+                     	gc.clearRect(0,0,oC.width,oC.height)
+                         cx=ev.pageX-oC.offsetLeft-disX;
+                         cy=ev.pageY-oC.offsetTop-disY;
+                         gc.arc(cx,cy,r,0,2*Math.PI,false);
+                         gc.stroke();
+                     };
+                     document.onmouseup=function(){
+                     	document.onmouseup=null;
+                     	document.onmousemove=null;
+                     };
+                     return false;
+         		}
+         	};
+         }
+
+	</script>
+</head>
+<body>
+	<canvas id="c1" width="800" height="600"></canvas>
+</body>
+</html>

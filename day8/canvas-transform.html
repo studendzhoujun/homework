@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>transform</title>
+	<style>
+    *{margin:0;padding:0;}
+    body{background:#111;text-align:center;}
+    canvas{background:#fff;}
+	</style>
+	<script>
+	function d2a(n){
+		return n*Math.PI/180;
+	}
+
+	function myRect(gc,x,y,w,h,r,color){
+		gc.save();
+		gc.beginPath();
+		gc.translate(x+w/2,y+h/2)
+		gc.fillStyle=color;
+		gc.rotate(d2a(r))
+
+		gc.fillRect(-w/2,-h/2,w,h);
+
+		gc.restore();
+	}
+       window=onload=function(){
+       	var oC=document.querySelector('#c1');
+       	var gc=oC.getContext('2d');
+        var r1=0;
+        var r2=0;
+        setInterval(function(){
+        	gc.clearRect(0,0,oC.width,oC.height)
+        	r1+=5;
+        	r2-=2;
+       	myRect(gc,100,100,300,100,r1,'red');
+       	myRect(gc,100,100,300,100,r2,'blue')
+        },16)
+
+       };
+	</script>
+</head>
+<body>
+	<canvas id="c1" width="800" height="600"></canvas>
+</body>
+</html>

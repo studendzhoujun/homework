@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>canvas-picture</title>
+	<style>
+     *{margin:0;padding:0;}
+     body{background:#111;text-align:center;}
+     canvas{background:#fff;}
+	</style>
+	<script>
+     window.onload=function(){
+     	var oC=document.querySelector('#c1');
+     	var gc=oC.getContext('2d');
+
+     	var oImg=new Image();
+     	oImg.src='1.jpg';
+     	oImg.onload=function(){
+     		gc.drawImage(oImg,100,100);
+
+     		var imageData=gc.getImageData(100,100,133,200);
+
+     		for(var x=0;x<133;x++){
+     			for(var y=0;y<200;y++){
+                      var r=imageData.data[(133*y+x)*4];
+                      var g=imageData.data[(133*y+x)*4+1];
+                      var b=imageData.data[(133*y+x)*4+2];
+                      var result=(r+b+g)/3;
+                     imageData.data[(133*y+x)*4]=result;
+                     imageData.data[(133*y+x)*4+1]=result;
+                     imageData.data[(133*y+x)*4+2]=result;
+
+     			}
+     		}
+     		gc.putImageData(imageData,400,100)
+     	}
+     };
+	</script>
+</head>
+<body>
+	<canvas id="c1" width="800" height="600"></canvas>
+</body>
+</html>
