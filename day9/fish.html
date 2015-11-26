@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>fish</title>
+	<style>
+    *{margin:0;padding:0;}
+    canvas{background:#fff;background:url(game_bg_2_hd.jpg);}
+    body{background:#111;text-align:center;}
+	</style>
+	<script>
+	function loadImages(json,fn){
+		var count=0;
+		var len=0;
+		var result={};
+		for(var name in json){
+			var oImg=new Image();
+			result[name]=oImg;
+			oImg.src=json[name];
+			len++;
+			oImg.onload=function(){
+				 count++;
+				 if(len==count){
+				 	fn&&fn(result)
+				 }
+			};
+
+
+		}
+	}
+     window.onload=function(){
+     	var oC=document.querySelector('#c1');
+     	var gc=oC.getContext('2d');
+
+     	var oImg=new Image();
+     	oImg.src='fish1.png';
+     	var speed=5;
+     	var x=0;
+     	var y=100;
+     	var i=0;
+     	oImg.onload=function(){
+     		setInterval(function(){
+     			gc.clearRect(0,0,oC.width,oC.height)
+     			 x+=speed;
+     	          //gc.drawImage(oImg,0,i*37,55,37,x,100,55,37);
+     	          //gc.drawImage(oImg,0,i*37,55,37,x,140,55,37);
+     	          for(var j=0;j<10;j++){
+     	          	 //gc.drawImage(oImg,0,i*37,55,37,x,100+(j*40),55,37);
+     	          	 //gc.drawImage(oImg,0,i*37,55,37,x-60,100+(j*40),55,37);
+     	          	 for(var k=0;k<j;k++){
+     	          	 	gc.drawImage(oImg,0,i*37,55,37,x-(60*k),100+(j*40),55,37);
+     	          	 }
+     	          }
+     	          i++;
+     	          if(x==1500){
+     	          	x=0;
+     	          }
+     	          if(i==4){
+     	          	i=0;
+     	          }
+     	    },80)
+        };
+     };
+	</script>
+</head>
+<body>
+	<canvas id="c1" width="800" height="600"></canvas>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>canvas</title>
+	<style>
+    *{margin:0;padding:0;}
+    body{background:#111;text-align:center;}
+    canvas{background:url(game_bg_2_hd.jpg);}
+	</style>
+	<script>
+	    function loadImages(json,fn){
+              var count=0;
+              var len=0;
+              var result={};
+              for(var name in json){
+              	count++;
+              	var oImg=new Image();
+              	result[name]=oImg;
+              	oImg.src=json[name];
+              	oImg.onload=function(){
+              		len++;
+              		if(count==len){
+              			fn&&fn(result)
+              		};
+              	}
+              }
+	    }
+	    //d2a  a2d
+	    function d2a(n){
+	    	return n*Math.PI/180;
+	    }
+	    function a2d(n){
+	    	return n*180/Math.PI;
+	    }
+       //create 构造函数
+        function Sprite(img){
+
+        	if(!img)return;
+        	this.img=img;
+        	this.x=0;
+        	this.y=0;
+        	this.w=0;
+        	this.h=0;
+        	this.sx=0;
+        	this.sy=0;
+        	this.speed=0;
+        	this.rotate=0;
+
+        }
+        //draw 
+        Sprite.prototype.draw=function(gc){
+        	gc.save();
+        	gc.beginPath();
+        	gc.translate(this.x,this.y);
+        	gc.rotate(d2a(this.rotate))
+                gc.drawImage(this.img,this.sx,this.sy,this.w,this.h,
+                     -this.w/2,-this.h/2,this.w,this.h
+                	);
+            gc.restore();
+        };
+        //move
+        Sprite.prototype.move=function(){
+        	this.x+=this.speed;
+        };
+        // fish
+        function Fish(imgs,type){
+        	Sprite.call(this,imgs['fish'+type]);
+
+        	var size=[
+                null,{w:55,h:37},{w:78,h:64}
+        	];
+        	this.type=type;
+        	this.w=size[type].w;
+        	this.h=size[type].h;
+        	this.speed=2;
+        	this.count=0;
+        }
+        Fish.prototype=new Sprite();
+        Fish.prototype.constructor=Fish;
+
+        //fish move
+        var oldmove=Fish.prototype.move;
+        Fish.prototype.move=function(){
+        	oldmove.call(this);
+
+        	this.count++;
+        	if(this.count%4==0){
+        	this.sy+=this.h;
+        	if(this.sy==4*this.h){
+        		this.sy=0;
+        	}
+          }
+        };
+
+
+
+       window.onload=function(){
+           var oC=document.querySelector('#c1');
+           var gc=oC.getContext('2d');
+
+           loadImages({coin:'coinAni2.png',fish1:'fish1.png'},function(imgs){
+                   
+                
+                 
+                
+                   var f=new Fish(imgs,1);
+                 	f.x=100;
+                 	f.y=300;
+
+                 	f.draw(gc)
+                    timer1=setInterval(function(){
+                    	gc.clearRect(0,0,oC.width,oC.height)
+                     f.move();
+                     f.draw(gc);
+                     if(f.x==800){
+                     	f.x=100;
+                     }
+                    },30)
+
+                   
+                
+                    
+                 
+                       
+                 
+                   
+                  
+           })
+           
+       };
+	</script>
+</head>
+<body>
+	<canvas id="c1" width="800" height="600"></canvas>
+</body>
+</html>

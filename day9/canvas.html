@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>canvas</title>
+	<style>
+    *{margin:0;padding:0;}
+    body{background:#111;text-align:center;}
+    canvas{background:url(game_bg_2_hd.jpg);}
+	</style>
+	<script>
+       window.onload=function(){
+           var oC=document.querySelector('#c1');
+           var gc=oC.getContext('2d');
+
+           var oImg=new Image();
+           oImg.src='coinAni2.png';
+           var i=0;
+           oImg.onload=function(){
+           	 setInterval(function(){
+           	 	gc.clearRect(0,0,oC.width,oC.height)
+              gc.drawImage(oImg,0,i*60,60,60,100,100,60,60);
+              i++;
+              if(i==10){
+              	i=0;
+              }
+            },50)
+           };
+       };
+	</script>
+</head>
+<body>
+	<canvas id="c1" width="800" height="600"></canvas>
+</body>
+</html>
