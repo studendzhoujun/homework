@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>calltext</title>
+	<style>
+      *{margin:0;padding:0;}
+      body{overflow:hidden;}
+      #div1{background:#909;width:200px;height:200px;position:absolute;left:100px;top:100px;border-radius:50%;}
+      #div2{background:#090;width:100px;height:100px;position:absolute;right:0;top:0;border-radius:50%;}
+	</style>
+	<script>
+	       function drag(obj,obj2){
+	       	var color=getComputedStyle(obj,false).background;
+	       	var color2=getComputedStyle(obj2,false).background;
+	       	   obj.onmousedown=function(ev){
+	       	   	     var disX=ev.pageX-obj.offsetLeft;
+	       	   	     var disY=ev.pageY-obj.offsetTop;
+	       	   	     document.onmousemove=function(ev){
+	       	   	          obj.style.left=ev.pageX-disX+'px';
+	       	   	          obj.style.top=ev.pageY-disY+'px';
+
+	       	   	          var x1=obj.offsetLeft+obj.offsetWidth/2;
+	       	   	          var y1=obj.offsetTop+obj.offsetHeight/2;
+	       	   	          var x2=obj2.offsetLeft+obj2.offsetWidth/2;
+	       	   	          var y2=obj2.offsetTop+obj2.offsetHeight/2;
+	       	   	          var a=x2-x1;
+	       	   	          var b=y2-y1;
+	       	   	          var dis=Math.sqrt(a*a+b*b);
+
+	       	   	          var r1=obj.offsetWidth/2;
+	       	   	          var r2=obj2.offsetWidth/2;
+	       	   	          if(dis<=r1+r2){
+	       	   	          	  obj.style.background='red';
+	       	   	          	  obj2.style.background='red';
+	       	   	          }else{
+	       	   	          	obj.style.background=color;
+	       	   	          	obj2.style.background=color2;
+	       	   	          }
+	       	   	     };
+	       	   	     document.onmouseup=function(){
+	       	   	     	document.onmousemove=null;
+	       	   	     	document.onmouseup=null;
+	       	   	     };
+	       	   	     return false;
+	       	   };
+	       }
+        window.onload=function(){
+        	var oDiv1=document.querySelector('#div1');
+        	var oDiv2=document.querySelector('#div2');
+
+        	 drag(oDiv2,oDiv1);
+        	 drag(oDiv1,oDiv2);
+        };
+	</script>
+</head>
+<body>
+	<div id="div1"></div>
+	<div id="div2"></div>
+</body>
+</html>

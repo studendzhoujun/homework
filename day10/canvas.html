@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>canvas</title>
+	<style>
+     *{margin:0;padding:0;}
+     body{background:#111;text-align:center;}
+     canvas{background:#fff;}
+	</style>
+	<script>
+     window.onload=function(){
+     	var oC=document.querySelector('#c1');
+     	var gc=oC.getContext('2d');
+        gc.fillStyle='pink';
+     	gc.fillRect(0,0,oC.width,oC.height);
+
+     	gc.beginPath();
+     	gc.fillStyle='red';
+     	gc.moveTo(100,100);
+     	gc.lineTo(100,300);
+     	gc.lineTo(200,200);
+     	gc.closePath();
+     	gc.fill();
+
+     	gc.beginPath();
+     	gc.fillStyle='blue';
+     	gc.moveTo(200,200);
+     	gc.lineTo(250,50);
+     	gc.lineTo(250,350);
+     	gc.fill();
+     };
+	</script>
+</head>
+<body>
+	<canvas id="c1" width="800" height="600"></canvas>
+</body>
+</html>

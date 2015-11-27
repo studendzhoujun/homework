@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>canvas</title>
+	<style>
+     *{margin:0;padding:0;}
+     body{background:#111;text-align:center;}
+     canvas{background:#fff;}
+	</style>
+	<script>
+      function loadImgs(json,fn){
+      	var count=0;
+      	var len=0;
+      	var result={};
+      	for(var name in json){
+      		count++;
+      		var oImg=new Image();
+      		result[name]=oImg;
+      		oImg.src=json[name];
+      		oImg.onload=function(){
+      			len++;
+      			if(count==len){
+      				fn&&fn(result)
+      			}
+      		};
+
+      	}
+      }
+     window.onload=function(){
+     	var oC=document.querySelector('#c1');
+     	var gc=oC.getContext('2d');
+        loadImgs({coin:'coinAni2.png'},function(imgs){
+        	var i=0;
+        	var y=0;
+        	setInterval(function(){
+        		gc.clearRect(0,0,oC.width,oC.height)
+        	gc.drawImage(imgs.coin,0,60*i,60,60,100,y,60,60);
+        	i++;
+        	y+=10;
+        	if(y==oC.height){
+        		y=0;
+        	}
+        	if(i==10){
+        		i=0
+        	}
+          },50)
+        })
+
+     };
+	</script>
+</head>
+<body>
+	<canvas id="c1" width="800" height="600"></canvas>
+</body>
+</html>
