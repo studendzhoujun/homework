@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>raha</title>
+	<script src="raphael.js"></script>
+	<script>
+         window.onload=function(){
+           var p=Raphael(0,0,800,600);
+           var path=p.path();
+           path.attr('path',[
+               'M',200,200,
+               'L',300,100,350,200,450,200,500,100,600,200,500,300,600,400,500,500,
+               450,400,350,400,300,500,200,400,300,300,
+               'Z'
+           	].join(' '))
+           path.attr('fill','blue');
+           path.click(function(){
+               
+           	path.animate({'path':[
+               'M',200,200,
+               'L',300,100,350,200,450,200,500,100,400,100,500,300,600,400,500,500,
+               450,400,350,400,300,500,200,400,300,300,
+               'Z'
+           	].join(' ')},1000)
+           });
+         };
+	</script>
+</head>
+
+<body>
+	
+</body>
+</html>

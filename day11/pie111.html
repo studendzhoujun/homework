@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>pie11</title>
+	<script src="raphael.js"></script>
+	<script>
+	   function d2a(n){
+	   	return n*Math.PI/180;
+	   }
+	   function getXY(cx,cy,r,deg){
+             var a=Math.sin(d2a(deg))*r;
+             var b=Math.cos(d2a(deg))*r;
+             return {x:cx+a,y:cy-b}
+	   }
+       window.onload=function(){
+       	var opage=Raphael(0,0,800,600);
+       	var path=opage.path();
+
+       	var cx=300;
+       	var cy=300;
+       	var r=100;
+       	var deg=0;
+       	var startX=getXY(cx,cy,r,0).x;
+
+       	var startY=getXY(cx,cy,r,0).y;
+
+        var endx=getXY(cx,cy,r,deg).x;
+
+        var endy=getXY(cx,cy,r,deg).y;
+
+       	path.attr('path',[
+              'M',startX,startY,
+              'A',r,r,0,deg>180?1:0,1,endx,endy,
+              'Z'
+       		].join(' '));
+       	path.attr({'stroke':'red','stroke-width':'10'})
+       	setInterval(function(){
+       		var oDate=new Date();
+       		var s=oDate.getSeconds();
+       		
+
+              deg=6*s;
+
+        var endx=getXY(cx,cy,r,deg).x;
+
+        var endy=getXY(cx,cy,r,deg).y;
+        if(deg>=354){
+        	path.attr('path',[
+              'M',startX,startY,
+              'A',r,r,0,deg>180?1:0,1,endx,endy
+        		].join(' '))
+        }else{
+       	path.animate({'path':[
+              'M',startX,startY,
+              'A',r,r,0,deg>180?1:0,1,endx,endy
+       		].join(' ')},700,'elastic');
+       	path.attr({'stroke':'red','stroke-width':'10'})
+       	 }
+
+       	},1000)
+
+       };
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

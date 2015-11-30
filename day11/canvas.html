@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>canvas</title>
+	<style>
+      *{margin:0;padding:0;}
+      canvas{background:#fff;}
+      body{background:#111;}
+	</style>
+	<script>
+        window.onload=function(){
+        	var oC=document.querySelector('#c1');
+        	var gc=oC.getContext('2d');
+
+        	gc.fillRect(100,100,300,200);
+        	gc.beginPath();
+        	gc.moveTo(400,300);
+        	gc.lineTo(500,500);
+        	gc.stroke();
+        };
+	</script>
+</head>
+<body>
+	<canvas id="c1" width="800" height="600"></canvas>
+</body>
+</html>

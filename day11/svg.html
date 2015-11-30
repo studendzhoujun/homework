@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>svg</title>
+	<style>
+        *{margin:0;padding:0;}
+        body{background:#111;}
+        svg{background:#fff;}
+        path{stroke:red;stroke-width:3;fill:pink;}
+
+	</style>
+	<script>
+         window.onload=function(){
+         	var oP=document.querySelector('path');
+         	oP.setAttribute('d',[
+                   'M',100,100,
+                   'L',200,200,
+                   'A',100,100,0,1,0,300,200,
+                   'L',400,100,
+                   'Z'
+         		].join(' '))
+         };
+	</script>
+</head>
+<body>
+	<svg width="800" height="600">
+		<path></path>
+	</svg>
+</body>
+</html>

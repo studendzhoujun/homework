@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>rrr</title>
+	<script src="raphael.js"></script>
+	<script>
+	function rndColor()
+{
+	return 'rgb('+[Math.floor(Math.random()*256), Math.floor(Math.random()*256), Math.floor(Math.random()*256)].join(',')+')';
+}
+	  function d2a(n){
+	  	return n*Math.PI/180;
+	  }
+	  function getPos(cx,cy,r,deg){
+           var a=Math.sin(d2a(deg))*r;
+           var b=Math.cos(d2a(deg))*r;
+           return {x:cx+a,y:cy-b}
+	  }
+	  function createPie(s,e,color){
+	  	var oPage=Raphael(0,0,800,600);
+     	var path=oPage.path();
+     	var cx=400;cy=400,r=100;
+     	var start=getPos(cx,cy,r,s);
+        var end=getPos(cx,cy,r,e);
+       
+     	path.attr('path',[
+               'M',cx,cy,
+               'L',start.x,start.y,
+               'A',r,r,0,(e-s)>180?1:0,1,end.x,end.y,
+               'Z'
+     		].join(' '));
+     	path.attr('fill',color)
+
+	  }
+     window.onload=function(){
+     	//createPie(0,60,'black');
+     	var arr=[200,100,300,450,600];
+        var arrAng=[];
+        var sum=0;
+        var now=0;
+        var oPage=Raphael(0,0,800,600);
+        var path=oPage.path();
+        for(var i=0;i<arr.length;i++){
+        	sum+=arr[i];
+        }
+        for(var i=0;i<arr.length;i++){
+        	arrAng[i]=360*arr[i]/sum;
+        }
+        for(var i=0;i<arrAng.length;i++){
+        	createPie(now,now+=arrAng[i],rndColor());
+        	now+=arrAng[i];
+        }
+           
+     };
+       
+	</script>
+</head>
+<body>
+	
+</body>
+</html> 
