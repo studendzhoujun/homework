@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>drag</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+	<style>
+       *{margin:0;padding:0;}
+       #box{width:100px;height:100px;background:#909;position:absolute;left:0;top:0;}
+       #box1{width:100px;height:100px;background:#090;position:absolute;right:0;top:0;}
+       #box2{width:100px;height:100px;background:#399;position:absolute;left:100px;top:200px;}
+	</style>
+	<script>
+      window.onload=function(){
+      	var aDiv=document.querySelectorAll('div');
+        for(var i=0;i<aDiv.length;i++){
+               drag(aDiv[i])
+        }
+
+        function drag(obj){
+        	obj.addEventListener('touchstart',function(ev){
+        		    var touch=ev.targetTouches[ev.targetTouches.length-1];
+
+        			var disX=touch.pageX-obj.offsetLeft;
+        			var disY=touch.pageY-obj.offsetTop;
+        			var id=touch.identifier;
+        			function fnmove(ev){
+        				  for(var i=0;i<ev.targetTouches.length;i++){
+        				  	if(ev.targetTouches[i].identifier==id){
+                             obj.style.left=ev.targetTouches[i].pageX-disX+'px';
+                             obj.style.top=ev.targetTouches[i].pageY-disY+'px';
+                            }
+                         }
+                          
+        			}
+        			function fnend(ev){
+        				for(var i=0;i<ev.targetTouches.length;i++){
+        					if(ev.targetTouches[i].identifier==id){
+        				obj.removeEventListener('touchmove',fnmove,false);
+        			    obj.removeEventListener('touchend',fnend,false);
+        			       }
+        			   }
+        			}
+        			obj.addEventListener('touchmove',fnmove,false);
+        			obj.addEventListener('touchend',fnend,false);
+        			ev.preventDefault();
+        		
+        	},false)
+        }
+      	 
+      };
+        
+        
+	</script>
+</head>
+<body>
+	<div id="box"></div>
+	<div id="box1"></div>
+	<div id="box2"></div>
+</body>
+</html>

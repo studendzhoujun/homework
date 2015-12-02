@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>table</title>
+	<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0" >
+	<style>
+     *{margin:0;padding:0;list-style:none;}
+     html{font-size:32px;}
+     body{height:3000px;}
+     #box{width:10rem;height:6.25rem;position:relative;overflow: hidden;}
+     #box ul{width:50rem;height:6.25rem;position:absolute;left:0;top:0;}
+     #box ul li{width:10rem;height:6.25rem;text-align:center;line-height:6.25rem;font-size:0.937rem;float:left;}  
+	</style>
+	<script>
+      window.onload=function(){
+         window.onresize=function(){
+              document.documentElement.style.fontSize=document.documentElement.clientWidth*32/320+'px';
+        };
+        document.documentElement.style.fontSize=document.documentElement.clientWidth*32/320+'px';
+      	var oUl=document.querySelector('#box ul');
+      	var aLi=document.querySelectorAll('#box ul li');
+      	oUl.addEventListener('touchstart',function(ev){
+      		var disX=ev.targetTouches[0].pageX-oUl.offsetLeft;
+          oUl.style.WebkitTransition='none';
+          var startX=ev.targetTouches[0].pageX;
+          var startY=ev.targetTouches[0].pageY;
+          var dir='';
+      		function fnmove(ev){
+            console.log(dir)
+            if(dir==''){
+                 if(Math.abs(ev.targetTouches[0].pageX-startX)>5){
+                    dir='x';
+                 };
+                 if(Math.abs(ev.targetTouches[0].pageY-startY)>5){
+                    dir='y';
+                 }
+            }else{
+                 switch(dir){
+                  case 'x':
+      			oUl.style.left=(ev.targetTouches[0].pageX-disX)/32+'rem';
+                  break;
+                  case 'y':
+                    ev.preventDefault();
+                  break;
+                  
+                 }
+            }
+      		}
+      		function fnend(){
+      			oUl.removeEventListener('touchmove',fnmove,false);
+      		  oUl.removeEventListener('touchend',fnend,false);
+            var n=Math.round(oUl.offsetLeft/aLi[0].offsetWidth);
+            if(n>0){
+              n=0;
+            }else if(n<-(aLi.length-1)){
+              n=-(aLi.length-1)
+            }
+            oUl.style.WebkitTransition='1s all ease';
+            oUl.style.left=n*(aLi[0].offsetWidth)/32+'rem';
+      		}
+      		oUl.addEventListener('touchmove',fnmove,false);
+      		oUl.addEventListener('touchend',fnend,false);
+      		ev.preventDefault();
+      	},false)
+      };
+	</script>
+</head>
+<body>
+	<div id="box">
+		<ul>
+			<li style="background:#090">0</li>
+			<li style="background:#009">1</li>
+			<li style="background:#909">2</li>
+			<li style="background:#990">3</li>
+			<li style="background:#900">4</li>
+		</ul>
+	</div>
+</body>
+</html>

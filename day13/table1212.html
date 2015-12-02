@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>table</title>
+	<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0" >
+	<style>
+     *{margin:0;padding:0;list-style:none;}
+     html{font-size:10rem;}
+     #box{width:10rem;height:5rem;position:relative;overflow: hidden;}
+     #box ul{width:50rem;height:5rem;position:absolute;left:0;top:0;}
+     #box ul li{width:10rem;height:5rem;text-align:center;line-height:5rem;font-size:30px;float:left;}
+	</style>
+	<script>
+      window.onload=function(){
+      	var oUl=document.querySelector('#box ul');
+      	var aLi=document.querySelectorAll('#box ul li');
+      	oUl.addEventListener('touchstart',function(ev){
+      		var disX=ev.targetTouches[0].pageX-oUl.offsetLeft;
+      		function fnmove(ev){
+      			oUl.style.left=ev.targetTouches[0].pageX-disX+'px';
+      		}
+      		function fnend(){
+      			oUl.removeEventListener('touchmove',fnmove,false);
+      		    oUl.removeEventListener('touchend',fnend,false);
+      		}
+      		oUl.addEventListener('touchmove',fnmove,false);
+      		oUl.addEventListener('touchend',fnend,false);
+      		ev.preventDefault();
+      	},false)
+      };
+	</script>
+</head>
+<body>
+	<div id="box">
+		<ul>
+			<li style="background:#090">0</li>
+			<li style="background:#009">1</li>
+			<li style="background:#909">2</li>
+			<li style="background:#990">3</li>
+			<li style="background:#900">4</li>
+		</ul>
+	</div>
+</body>
+</html>

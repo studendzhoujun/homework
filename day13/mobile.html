@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+	<title>mobile</title>
+	<style>
+	  *{margin:0;padding:0;list-style:none;}
+	  html{font-size:32px;}
+       .div1{width:10rem;height:2rem;background:#111;text-align:center;line-height:2rem;font-size:1rem;color:#fff;}
+       .div2{width:10rem;height:30rem;background:url(bg1.png);text-align:center;line-height:15rem;font-size:2rem;}
+       .div3{width:10rem;height:2rem;background:#909;text-align:center;line-height:2rem;font-size:1rem;}
+       .div2-ul{width:100%;height:10rem;}
+       .div2-ul li{width:9rem;margin:0 0.5rem;height:5.9375rem;position:relative;}
+       .div2-ul li img{width:100%;position:absolute;left:0;top:0;}
+       
+	</style>
+	<script>
+      window.onload=function(){
+      	    window.onresize=function(){
+      	    	document.documentElement.style.fontSize=document.documentElement.clientWidth*32/320+'px';
+      	    };
+      	    document.documentElement.style.fontSize=document.documentElement.clientWidth*32/320+'px';
+      };
+	</script>
+</head>
+<body>
+	<div class="div1">studentzhoujun</div>
+	<div class="div2">
+		<ul class="div2-ul">
+			<li><img src="z9.jpg"></li>
+			<li><img src="z9.jpg"></li>
+			<li><img src="z9.jpg"></li>
+			<li><img src="z9.jpg"></li>
+		</ul>
+	</div>
+	<div class="div3">foot</div>
+</body>
+</html>
