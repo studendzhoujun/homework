@@ -2,3 +2,4 @@
 #hello world
 #正则表达式
 # imgReg=`/<img.*?(?:>|\/>)/ig`
+# srcReg=`/src=[\'\"]?([^\'\"]*)[\'\"]?/i`
